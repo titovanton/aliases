@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-alias vpnstart='bash ~/vpn/start_vpn.sh'
-alias vpnstop='bash ~/vpn/stop_vpn.sh'
-alias vpnstatus='bash ~/vpn/get_status.sh'
+alias vpnstart='bash /apps/vpn/start_vpn.sh'
+alias vpnstop='bash /apps/vpn/stop_vpn.sh'
+alias vpnstatus='bash /apps/vpn/get_status.sh'
