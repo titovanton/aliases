@@ -6,11 +6,10 @@ alias lazydocker='docker run --rm -it --name=lazydocker -v /var/run/docker.sock:
 alias flake='docker run --rm -ti -v $PWD:/app:ro --name=flake titovanton/flake:1.1'
 alias ctop="docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.sock:ro quay.io/vektorlab/ctop:latest"
 
-alias dc="docker-compose -p pd"
+alias dc="docker-compose"
 
 restart_func() {
   dc stop $1 && dc up -d $1
 }
 
 alias restart=restart_func
-
