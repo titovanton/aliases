@@ -9,6 +9,7 @@ alias ctop="docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/r
 alias dc='docker-compose'
 alias dps='docker ps --format "{{.ID}}\t{{.Names}}"'
 alias dcs='docker-compose ps --services'
+alias dcu='docker-compose up -d'
 
 restart_func() {
   dc stop $1 && dc up -d $1
