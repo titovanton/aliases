@@ -16,7 +16,7 @@ restart_func() {
 }
 
 exec_func() {
-  dc exec $1 bash
+  dc exec $1 ${2:-bash}
 }
 
 alias restart=restart_func
