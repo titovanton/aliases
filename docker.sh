@@ -16,7 +16,7 @@ restart_func() {
   dc stop $1 && dc up -d $1
 }
 
-exec_func() {
+compose_exec_func() {
   if [ -z $2 ]; then
     dc exec $1 bash
   else
@@ -24,5 +24,23 @@ exec_func() {
   fi
 }
 
+docker_exec_func() {
+  if [ -z $2 ]; then
+    docker exec -ti $1 bash
+  else
+    docker exec -ti $@
+  fi
+}
+
+compose_run_func() {
+  if [ -z $2 ]; then
+    dc run --rm --service-ports $1 bash
+  else
+    dc run --rm --service-ports $@
+  fi
+}
+
 alias restart=restart_func
-alias dce=exec_func
+alias dce=compose_exec_func
+alias dcr=compose_run_func
+alias de=docker_exec_func
