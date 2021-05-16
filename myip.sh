@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-alias myip='curl https://ipinfo.io/ip ; echo'
+alias myip='border $(curl -s https://ipinfo.io/ip)'
