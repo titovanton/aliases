@@ -11,6 +11,7 @@ alias dps='docker ps --format "{{.ID}}\t{{.Names}}"'
 alias dcs='docker-compose ps --services'
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'
+alias dcb='docker-compose build'
 alias dcl='docker-compose logs -f'
 
 restart_func() {
