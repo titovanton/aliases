@@ -6,13 +6,20 @@ alias lazydocker='docker run --rm -it --name=lazydocker -v /var/run/docker.sock:
 alias flake='docker run --rm -ti -v $PWD:/app:ro --name=flake titovanton/flake:1.1.1'
 alias ctop="docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.sock:ro quay.io/vektorlab/ctop:latest"
 
-alias dc='docker-compose'
+dc() {
+  if [ -f docker-compose.local.yml ]; then
+    docker-compose -f docker-compose.local.yml $@
+  else
+    docker-compose $@
+  fi
+}
+
 alias dps='docker ps --format "{{.ID}}\t{{.Names}}"'
-alias dcs='docker-compose ps --services'
-alias dcu='docker-compose up -d'
-alias dcd='docker-compose down'
-alias dcb='docker-compose build'
-alias dcl='docker-compose logs -f'
+alias dcs='dc ps --services'
+alias dcu='dc up -d'
+alias dcd='dc down'
+alias dcb='dc build'
+alias dcl='dc logs -f'
 
 restart_func() {
   dc stop $1 && dc up -d $1
