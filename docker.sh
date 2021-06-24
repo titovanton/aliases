@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 
-alias dnr='docker rmi -f $(docker images -f dangling=true -q)'
-
-alias lazydocker='docker run --rm -it --name=lazydocker -v /var/run/docker.sock:/var/run/docker.sock:ro lazyteam/lazydocker'
-alias flake='docker run --rm -ti -v $PWD:/app:ro --name=flake titovanton/flake:1.1.1'
-alias ctop="docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.sock:ro quay.io/vektorlab/ctop:latest"
-
-dc() {
+docker_compose() {
   if [ -f docker-compose.local.yml ]; then
     docker-compose -f docker-compose.local.yml $@
   else
@@ -14,22 +8,15 @@ dc() {
   fi
 }
 
-alias dps='docker ps --format "{{.ID}}\t{{.Names}}"'
-alias dcs='dc ps --services'
-alias dcu='dc up -d'
-alias dcd='dc down'
-alias dcb='dc build'
-alias dcl='dc logs -f'
-
 restart_func() {
-  dc stop $1 && dc up -d $1
+  docker_compose stop $1 && docker_compose up -d $1
 }
 
 compose_exec_func() {
   if [ -z $2 ]; then
-    dc exec $1 bash
+    docker_compose exec $1 bash
   else
-    dc exec $@
+    docker_compose exec $@
   fi
 }
 
@@ -43,13 +30,25 @@ docker_exec_func() {
 
 compose_run_func() {
   if [ -z $2 ]; then
-    dc run --rm --service-ports $1 bash
+    docker_compose run --rm --service-ports $1 bash
   else
-    dc run --rm --service-ports $@
+    docker_compose run --rm --service-ports $@
   fi
 }
 
+
+alias dnr='docker rmi -f $(docker images -f dangling=true -q)'
+alias flake='docker run --rm -ti -v $PWD:/app:ro --name=flake titovanton/flake:1.1.1'
+
+alias dc=docker_compose
 alias restart=restart_func
 alias dce=compose_exec_func
 alias dcr=compose_run_func
 alias de=docker_exec_func
+
+alias dps='docker ps --format "{{.ID}}\t{{.Names}}"'
+alias dcs='dc ps --services'
+alias dcu='dc up -d'
+alias dcd='dc down'
+alias dcb='dc build'
+alias dcl='dc logs -f'
