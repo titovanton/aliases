@@ -19,3 +19,10 @@ rgl() {
 gl() {
   lgl $@
 }
+
+_gitri() {
+  git rebase -i HEAD~$1
+}
+
+alias gitcam='git commit -am'
+alias gitri='_gitri'
