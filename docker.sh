@@ -1,22 +1,34 @@
 #!/usr/bin/env bash
 
-docker_compose() {
-  if [ -f docker-compose.local.yml ]; then
-    docker-compose -f docker-compose.local.yml $@
-  else
-    docker-compose $@
-  fi
-}
+# docker_compose() {
+#   if [ -f docker-compose.local.yml ]; then
+#     docker compose -f docker-compose.local.yml $@
+#   else
+#     docker compose $@
+#   fi
+# }
+
+alias dc='docker compose'
+alias dps='docker ps --format "{{.ID}}\t{{.Names}}"'
+alias dcs='dc ps --services'
+alias dcu='dc up -d'
+alias dcd='dc down --remove-orphans'
+alias dcb='dc build'
+alias dcl='dc logs -f'
+alias dk='docker kill'
+
+alias dnr='docker rmi -f $(docker images -f dangling=true -q)'
+alias flake='docker run --rm -ti -v $PWD:/app:ro --name=flake titovanton/flake:1.1.1'
 
 restart_func() {
-  docker_compose stop $1 && docker_compose up -d $1
+  dc stop $1 && dc up -d $1
 }
 
 compose_exec_func() {
   if [ -z $2 ]; then
-    docker_compose exec $1 bash
+    dc exec $1 bash
   else
-    docker_compose exec $@
+    dc exec $@
   fi
 }
 
@@ -30,26 +42,13 @@ docker_exec_func() {
 
 compose_run_func() {
   if [ -z $2 ]; then
-    docker_compose run --rm --service-ports $1 bash
+    dc run --rm --service-ports $1 bash
   else
-    docker_compose run --rm --service-ports $@
+    dc run --rm --service-ports $@
   fi
 }
 
-
-alias dnr='docker rmi -f $(docker images -f dangling=true -q)'
-alias flake='docker run --rm -ti -v $PWD:/app:ro --name=flake titovanton/flake:1.1.1'
-
-alias dc=docker_compose
 alias restart=restart_func
 alias dce=compose_exec_func
 alias dcr=compose_run_func
 alias de=docker_exec_func
-
-alias dps='docker ps --format "{{.ID}}\t{{.Names}}"'
-alias dcs='dc ps --services'
-alias dcu='dc up -d'
-alias dcd='dc down'
-alias dcb='dc build'
-alias dcl='dc logs -f'
-alias dk='docker kill'
