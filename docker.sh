@@ -18,7 +18,6 @@ alias dcl='dc logs -f'
 alias dk='docker kill'
 
 alias dnr='docker rmi -f $(docker images -f dangling=true -q)'
-alias flake='docker run --rm -ti -v $PWD:/app:ro --name=flake titovanton/flake:1.1.1'
 
 restart_func() {
   dc stop $1 && dc up -d $1
