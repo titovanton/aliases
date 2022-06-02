@@ -19,3 +19,14 @@ rgl() {
 gl() {
   lgl $@
 }
+
+git_rebase_i() {
+  git rebase -i HEAD~$1
+}
+
+alias gs="git status"
+alias gc="git commit -am"
+alias gp="git push origin"
+alias gpf="git push -f origin"
+alias gr="git rebase"
+alias gri="git_rebase_i"

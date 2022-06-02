@@ -1,2 +1,3 @@
 ignored_files
 enabled/*.sh
+*DS_Store
