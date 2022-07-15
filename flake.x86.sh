@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-alias flake='docker run --rm -ti -v $PWD:/app:ro --name=flake titovanton/flake:1.1.1'
+alias flake='id=$(docker ps --filter name=flake --format "{{.ID}}") && \
+             if [ ! -z "$id" ]; then docker kill "$id"; fi && \
+             docker run --rm -ti -v $PWD:/app:ro --name=flake titovanton/flake:1.1.1'

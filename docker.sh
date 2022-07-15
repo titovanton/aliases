@@ -47,7 +47,16 @@ compose_run_func() {
   fi
 }
 
+compose_up_f_d_func() {
+  if [ -z $1 ]; then
+    echo 'No argument specified.'
+  else
+    dc -f $1 up -d
+  fi
+}
+
 alias restart=restart_func
 alias dce=compose_exec_func
 alias dcr=compose_run_func
 alias de=docker_exec_func
+alias dcfu=compose_up_f_d_func
