@@ -60,4 +60,5 @@ alias dce=compose_exec_func
 alias dcr=compose_run_func
 alias de=docker_exec_func
 alias dcfu=compose_up_f_d_func
+alias dcdu='dcd && dcu'
 alias dcdue='dcd && dcu && dce'
