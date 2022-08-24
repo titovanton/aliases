@@ -55,8 +55,11 @@ compose_up_f_d_func() {
 alias restart=restart_func
 alias dce=compose_exec_func
 alias dcr=compose_run_func
+alias dcrr='dc run --rm --service-ports'
 alias de=docker_exec_func
 alias dcfu=compose_up_f_d_func
 alias dcdu='dcd && dcu'
 alias dcue='dcu && dce'
 alias dcdue='dcd && dcu && dce'
+alias dcdr='dcd && dcr'
+alias dcdrr='dcd && dcrr'
