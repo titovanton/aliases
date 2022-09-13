@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
-if [ $DOCKER_ENV ]; then
-  alias dc="docker compose -f docker-compose-$DOCKER_ENV.yml"
-else
-  alias dc='docker compose'
-fi
+dc_docker_env_func() {
+  if [ $DOCKER_ENV ]; then
+    docker compose -f docker-compose-$DOCKER_ENV.yml  $@
+  else
+    docker compose  $@
+  fi
+}
+
+alias dc=dc_docker_env_func
 
 alias dps='docker ps --format "{{.ID}}\t{{.Names}}"'
 alias dcs='dc ps --services'
