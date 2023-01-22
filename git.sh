@@ -26,6 +26,7 @@ git_rebase_i() {
 
 alias gs="git status"
 alias gc="git commit -am"
+alias gcm="git commit -m"
 alias gp="git push origin"
 alias gpf="git push -f origin"
 alias gr="git rebase"
