@@ -21,7 +21,7 @@ gl() {
 }
 
 git_rebase_i() {
-  git rebase -i HEAD~$1
+  git rebase -i HEAD~$1 --committer-date-is-author-date
 }
 
 alias gs="git status"
@@ -29,7 +29,7 @@ alias gc="git commit -am"
 alias gcm="git commit -m"
 alias gp="git push origin"
 alias gpf="git push -f origin"
-alias gr="git rebase"
+alias gr="git rebase --committer-date-is-author-date"
 alias gri="git_rebase_i"
 alias gd="git diff"
 alias gdno="git diff --name-only"
