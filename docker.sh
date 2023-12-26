@@ -56,6 +56,22 @@ compose_up_f_d_func() {
   fi
 }
 
+down_build_up_exec() {
+  if [ -z $1 ]; then
+    echo 'No argument specified.'
+  else
+    dcd && dcb $1 && dcu && dce $1
+  fi
+}
+
+down_build_up_log() {
+  if [ -z $1 ]; then
+    echo 'No argument specified.'
+  else
+    dcd && dcb $1 && dcu && dcl $1
+  fi
+}
+
 alias restart=restart_func
 alias dce=compose_exec_func
 alias dcr=compose_run_func
@@ -69,3 +85,5 @@ alias dcul='dcu && dcl'
 alias dcdul='dcd && dcu && dcl'
 alias dcdr='dcd && dcr'
 alias dcdrr='dcd && dcrr'
+alias dcdbue=down_build_up_exec
+alias dcdbul=down_build_up_log
