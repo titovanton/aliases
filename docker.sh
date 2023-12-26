@@ -65,5 +65,7 @@ alias dcfu=compose_up_f_d_func
 alias dcdu='dcd && dcu'
 alias dcue='dcu && dce'
 alias dcdue='dcd && dcu && dce'
+alias dcul='dcu && dcl'
+alias dcdul='dcd && dcu && dcl'
 alias dcdr='dcd && dcr'
 alias dcdrr='dcd && dcrr'
