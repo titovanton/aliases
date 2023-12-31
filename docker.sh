@@ -2,7 +2,12 @@
 
 alias dc=dc_docker_env_func
 alias dcb='dc build'
+alias dcbu='build_up'
+alias dcbue='build_up_exec'
+alias dcbul='build_up_log'
 alias dcd='dc down --remove-orphans'
+alias dcdb='dcd && dcb'
+alias dcdbu='down_build_up'
 alias dcdbue=down_build_up_exec
 alias dcdbul=down_build_up_log
 alias dcdr='dcd && dcr'
@@ -69,6 +74,14 @@ compose_up_f_d_func() {
   fi
 }
 
+down_build_up() {
+  if [ -z $1 ]; then
+    echo 'No argument specified.'
+  else
+    dcd && dcb $1 && dcu
+  fi
+}
+
 down_build_up_exec() {
   if [ -z $1 ]; then
     echo 'No argument specified.'
@@ -84,4 +97,29 @@ down_build_up_log() {
     dcd && dcb $1 && dcu && dcl $1
   fi
 }
+
+build_up_exec() {
+  if [ -z $1 ]; then
+    echo 'No argument specified.'
+  else
+    dcb $1 && dcu && dce $1
+  fi
+}
+
+build_up_log() {
+  if [ -z $1 ]; then
+    echo 'No argument specified.'
+  else
+    dcb $1 && dcu && dcl $1
+  fi
+}
+
+build_up() {
+  if [ -z $1 ]; then
+    echo 'No argument specified.'
+  else
+    dcb $1 && dcu
+  fi
+}
+
 
