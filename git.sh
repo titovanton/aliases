@@ -8,12 +8,20 @@ lgl() {
     PARAM=$@
   fi
 
-  git log $PARAM --pretty='format:%Cred %h %Cgreen %an %Creset %cr %Cgreen %s%Creset'
+  git \
+    --no-pager \
+    log \
+    $PARAM \
+    --pretty='format:%Cred %h %Cgreen %an %Creset %cr %Cgreen %s%Creset'
 }
 
 # right side parameters
 rgl() {
-  git log --pretty='format:%Cred %h %Cgreen %an %Creset %cr %Cgreen %s%Creset' $@
+  git \
+    --no-pager \
+    log \
+    --pretty='format:%Cred %h %Cgreen %an %Creset %cr %Cgreen %s%Creset' \
+    $@
 }
 
 gl() {
