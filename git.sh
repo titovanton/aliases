@@ -12,7 +12,8 @@ lgl() {
     --no-pager \
     log \
     $PARAM \
-    --pretty='format:%Cred %h %Cgreen %an %Creset %cr %Cgreen %s%Creset'
+    --date=format-local:"%Y.%m.%d %I:%M %p" \
+    --pretty="format:%Cred %h %Cgreen %an %Creset %cd %Cgreen %s %Creset"
 }
 
 # right side parameters
@@ -20,7 +21,8 @@ rgl() {
   git \
     --no-pager \
     log \
-    --pretty='format:%Cred %h %Cgreen %an %Creset %cr %Cgreen %s%Creset' \
+    --date=format-local:"%Y.%m.%d %I:%M %p" \
+    --pretty="format:%Cred %h %Cgreen %an %Creset %cd %Cgreen %s %Creset"
     $@
 }
 
