@@ -30,11 +30,23 @@ alias dk='docker kill'
 alias dnr='docker rmi -f $(docker images -f dangling=true -q)'
 alias dps='docker ps --format "{{.ID}}\t{{.Names}}"'
 
+# Empty value by default, allowing tab autocompletion
+# when specified explicitly.
+DOCKER_OVERRIDE=
+
 dc_docker_env_func() {
-  if [ $DOCKER_ENV ]; then
-    docker compose -f docker-compose-$DOCKER_ENV.yml  $@
+  # This shortcut allows using the override mechanism
+  # without explicitly mentioning.
+  # Example:
+  #     DOCKER_OVERRIDE=docker-compose.staging.yml
+  #     dc <something>
+  # that translates to:
+  #     docker compose -f docker-compose.yml -f docker-compose.staging.yml <something>
+
+  if [ $DOCKER_OVERRIDE ]; then
+    docker compose -f docker-compose.yml -f $DOCKER_OVERRIDE $@
   else
-    docker compose  $@
+    docker compose $@
   fi
 }
 
