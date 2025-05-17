@@ -28,7 +28,7 @@ alias dcul='dcu && dcl'
 alias de=docker_exec_func
 alias dk='docker kill'
 alias dnr='docker rmi -f $(docker images -f dangling=true -q)'
-alias dps='docker ps --format "{{.ID}}\t{{.Names}}"'
+alias dps='echo "DOCKER_OVERRIDE=${DOCKER_OVERRIDE}"; docker ps --format "{{.ID}}\t{{.Names}}"'
 
 # Empty value by default, allowing tab autocompletion
 # when specified explicitly.
