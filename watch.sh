@@ -13,6 +13,8 @@ watchpy() {
 }
 
 run_dmypy() {
+    # dmypy  is unstable yet
+
     echo -e "Starting \033[1;33mmypy\033[0m daemon..."
     uv run dmypy start
 
@@ -22,5 +24,9 @@ run_dmypy() {
     uv run dmypy stop
 }
 
-alias wmp=run_dmypy
+run_mypy() {
+    watchpy "mypy \${watch_src_path}" $1
+}
+
+alias wmp=run_mypy
 alias wrf='uv run ruff check -w'
