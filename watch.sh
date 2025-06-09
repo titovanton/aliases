@@ -28,5 +28,10 @@ run_mypy() {
     watchpy "mypy \${watch_src_path}" $1
 }
 
+run_ruff() {
+    watchpy "ruff check \${watch_src_path}" $1
+}
+
 alias wmp=run_mypy
-alias wrf='uv run ruff check -w'
+# alias wrf='uv run ruff check -w'
+alias wrf=run_ruff
