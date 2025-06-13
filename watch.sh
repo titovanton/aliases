@@ -3,13 +3,22 @@
 watchpy() {
     folder="${2:-./}"
     patterns='*.py'
+    command="
+        [ \"\$watch_event_type\" = \"modified\" ]\
+        && clear\
+        && $1;
+    "
     echo -e "\nStarting \033[1;33mwatchmedo\033[0m for:\n"
     echo -e "\tPatterns: $patterns\n"
     echo -e "\tFolder: $folder\n"
     echo -e "\tCommand: $1\n"
     uv run watchmedo shell-command \
-    --patterns=$patterns -W --recursive \
-    --command="clear && $1" $folder
+    --patterns=$patterns \
+    -W \
+    --recursive \
+    --ignore-directories \
+    --command=$command \
+    $folder
 }
 
 run_dmypy() {
