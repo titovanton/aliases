@@ -8,6 +8,8 @@ watchpy() {
         && clear\
         && $1;
     "
+    ignore_patterns="__pycache__/*;.mypy_cache/*;.ruff_cache/*;.pytest_cache/*;.venv/*;venv/*;env/*;build/*;dist/*;*.egg-info/*;node_modules/*;.git/*;.github/*;.idea/*;.vscode/*;docker/*;.docker/*;docs/_build/*;_build/*"
+
     echo -e "\nStarting \033[1;33mwatchmedo\033[0m for:\n"
     echo -e "\tPatterns: $patterns\n"
     echo -e "\tFolder: $folder\n"
@@ -17,6 +19,7 @@ watchpy() {
     -W \
     --recursive \
     --ignore-directories \
+    --ignore-patterns=$ignore_patterns \
     --command=$command \
     $folder
 }
