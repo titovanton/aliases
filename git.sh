@@ -1,33 +1,30 @@
 #! /bin/bash
 
-# left side parameters
-lgl() {
-  if [ -z $@ ]; then
-    PARAM=-10
+gl() {
+  if [ -z $1 ]; then
+    num=-10
   else
-    PARAM=$@
+    num=$1
   fi
 
-  git \
-    --no-pager \
-    log \
-    $PARAM \
+  git --no-pager log $num \
     --date=format-local:"%Y.%m.%d %I:%M %p" \
-    --pretty="format:%Cred %h %Cgreen %an %Creset %cd %Cgreen %s %Creset"
+    --pretty="format:%Cred %h %Cgreen %an %Creset %cd %Cgreen %s %Creset" \
+    $2
 }
 
-# right side parameters
-rgl() {
-  git \
-    --no-pager \
-    log \
-    --date=format-local:"%Y.%m.%d %I:%M %p" \
-    --pretty="format:%Cred %h %Cgreen %an %Creset %cd %Cgreen %s %Creset"
-    $@
-}
+_gls() {
+  if [ -z $1 ]; then
+    num=-10
+  else
+    num=$1
+  fi
 
-gl() {
-  lgl $@
+  git --no-pager log --stat \
+    $num \
+    --date=format-local:"%Y.%m.%d %I:%M %p" \
+    --pretty="format:%Cred %h %Cgreen %an %Creset %cd %Cgreen %s %Creset" \
+    $2
 }
 
 git_rebase_i() {
@@ -43,8 +40,7 @@ alias gr="git rebase --committer-date-is-author-date"
 alias gri="git_rebase_i"
 alias gd="git diff"
 alias gdno="git diff --name-only"
-alias gls="gl --stat"
-alias glf="rgl"
+alias gls="_gls"
 alias gpm="gp master"
 alias gpp="gp production"
 alias gpsf="gpf staging"
